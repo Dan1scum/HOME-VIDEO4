@@ -1,13 +1,15 @@
-from django.shortcuts import render
-from .models import Movie
+from django.shortcuts import render, get_object_or_404
+from .models import Genre
+from movies.models import Movie
 
-def movie_list(request):
-    movies = Movie.objects.all()
-    return render(request, 'movies/movie_list.html', {'movies': movies})
+def genre_list(request):
+    genres = Genre.objects.all()
+    return render(request, 'genre/genre_list.html', {'genres': genres})
 
 
-def movie_detail(request, id):
-    movie = Movie.objects.get(id=id)
-    return render(request, 'movies/movie_detail.html', {'movie': movie})
+def genre_detail(request, id):
+    genre = get_object_or_404(Genre, id=id)
+    movies = Movie.objects.filter(genres=genre)
+    return render(request, 'genre/genre_detail.html', {'genre': genre, 'movies': movies})
 
 # Create your views here.

@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Жанры</h2>
+<ul>
+    {% for genre in genres %}
+        <li><a href="{% url 'genre_detail' genre.id %}">{{ genre.name }}</a></li>
+    {% empty %}
+        <li>Жанры не найдены</li>
+    {% endfor %}
+</ul>
+{% endblock %}

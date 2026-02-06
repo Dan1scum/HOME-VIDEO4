@@ -4,6 +4,16 @@
 <h1>{{ movie.title }}</h1>
 
 <p>{{ movie.description }}</p>
-<p>Категория: {{ movie.category.name }}</p>
+<p>Жанры:
+	{% for genre in movie.genres.all %}
+		{{ genre.name }}{% if not forloop.last %}, {% endif %}
+	{% empty %}
+		Нет жанров
+	{% endfor %}
+</p>
+
+{% if movie.image %}
+    <p><img src="{{ movie.image.url }}" width="400" alt="{{ movie.title }}"></p>
+{% endif %}
 
 {% endblock %}
